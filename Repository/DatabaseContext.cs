@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Configuration;
 using System.Numerics;
 using System.Reflection.Emit;
 using dviraciu_nuoma_backend.Models;
@@ -8,14 +9,17 @@ namespace dviraciu_nuoma_backend.Repository
 {
     public class DatabaseContext: DbContext
     {
-        public DatabaseContext(DbContextOptions<DatabaseContext> options) : base(options)
+        string connectionString;
+        public DatabaseContext(DbContextOptions<DatabaseContext> options, IConfiguration config) : base(options)
         {
-
+            connectionString = config.GetConnectionString("NsqlConnection");
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseNpgsql(@"Host=localhost;Port=5432;Database=DviraciuNuoma;Username=postgres;Password=test");
+        {
+            optionsBuilder
+                        .UseNpgsql($@"{connectionString}");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
