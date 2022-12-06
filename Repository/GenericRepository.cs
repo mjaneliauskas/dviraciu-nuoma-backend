@@ -8,6 +8,7 @@ namespace dviraciu_nuoma_backend.Repository
         public GenericRepository(DatabaseContext context)
         {
             _context = context;
+            _context.Database.EnsureCreated();
         }
 
         public IQueryable<T> Get(Expression<Func<T, bool>> predicate)
