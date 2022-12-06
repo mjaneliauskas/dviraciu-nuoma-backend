@@ -33,7 +33,7 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 //}
 app.UseSwagger();
 app.UseSwaggerUI();
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
