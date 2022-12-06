@@ -27,8 +27,8 @@ namespace dviraciu_nuoma_backend.Repository
             modelBuilder.Entity<UserModel>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<DviratisModel>().Property(e => e.Id).ValueGeneratedOnAdd();
             modelBuilder.Entity<KelioneModel>().Property(e => e.Id).ValueGeneratedOnAdd();
-            modelBuilder.Entity<KelioneModel>().HasOne(e => e.Vartotojas);
-            modelBuilder.Entity<KelioneModel>().HasOne(e => e.Dviratis);
+            modelBuilder.Entity<KelioneModel>().Navigation(e => e.Dviratis).AutoInclude();
+            modelBuilder.Entity<KelioneModel>().Navigation(e => e.Vartotojas).AutoInclude();
             //modelBuilder.Entity<Player>().Navigation(e => e.Team);
         }
 

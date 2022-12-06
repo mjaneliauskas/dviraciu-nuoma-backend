@@ -12,8 +12,8 @@ using dviraciu_nuoma_backend.Repository;
 namespace dviraciu_nuoma_backend.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20221206132939_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20221206182220_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
