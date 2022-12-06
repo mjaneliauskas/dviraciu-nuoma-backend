@@ -1,6 +1,7 @@
 using dviraciu_nuoma_backend.Repository;
 using dviraciu_nuoma_backend.Services;
 using Microsoft.EntityFrameworkCore;
+using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,7 +21,13 @@ builder.Services.AddScoped<IDviratisRepository, DviratisRepository>();
 builder.Services.AddScoped<IDviratisService, DviratisService>();
 builder.Services.AddScoped<IKelioneService, KelioneService>();
 builder.Services.AddScoped<IUserService, UserService>();
-
+builder.WebHost.ConfigureKestrel((context, serverOptions) =>
+{
+    serverOptions.Listen(IPAddress.Any, 8000, listenOptions =>
+    {
+        listenOptions.UseConnectionLogging();
+    });
+});
 
 
 var app = builder.Build();
@@ -33,6 +40,7 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 //}
 app.UseSwagger();
 app.UseSwaggerUI();
+
 //app.UseHttpsRedirection();
 
 app.UseAuthorization();
